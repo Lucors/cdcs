@@ -1,0 +1,20 @@
+#This is a comment
+#Example query: '{"command":"next","scripts":[{"filename":"example","cursorPosition":0}],"customVars":{"test": 5}}'
+@test
+
+@nonstop
+	@async
+		alert("async Hello world!");
+	@end.
+	var msg = "some text here"
+	@php
+		if ($this->query["customVars"]["test"] == 5){
+			$this->inlineCDCScript[] = "@anon test";
+		}
+	@end.
+@stop.
+
+@goto lbl
+alert("This line has been skipped");
+@label lbl
+alert(msg);
