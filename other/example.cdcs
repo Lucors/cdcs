@@ -8,8 +8,8 @@
 	@end.
 	var msg = "some text here"
 	@php
-		if ($this->query["customVars"]["test"] == 5){
-			$this->inlineCDCScript[] = "@anon test";
+		if ($this->getUserVar("test") == 5){
+			$this->pushInlineCDCS("@anon test");
 		}
 	@end.
 @stop.
