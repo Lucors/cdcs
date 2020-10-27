@@ -130,6 +130,16 @@
                 $this->lastOf($this->response["expressions"])["js"] .= ' ' . $exp;
             }
         }
+        public function pushInlineCDCS($line){
+            $delimiterPos = strpos($line, '\n');
+            if ($delimiterPos === false) {
+                $this->inlineCDCScript[] = $line;
+            } 
+            else {
+                $lines = explode('\n', $line);
+                $this->inlineCDCScript = array_merge($this->inlineCDCScript, $lines)
+            }
+        }
         public static function &lastOf(&$array){
             return $array[count($array)-1];
         }
