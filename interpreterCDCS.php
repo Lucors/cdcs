@@ -135,6 +135,12 @@
         }
         
         //GET Funcs
+        public function getUserVar($key){
+            if (array_key_exists($key, $this->query["customVars"])){
+                return $this->query["customVars"][$key]
+            }
+            return false;
+        }
         public function getReaded(){
             return $this->readed . ftell($this->scriptPtr);
         }
