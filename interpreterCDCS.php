@@ -137,7 +137,7 @@
             } 
             else {
                 $lines = explode('\n', $line);
-                $this->inlineCDCScript = array_merge($this->inlineCDCScript, $lines)
+                $this->inlineCDCScript = array_merge($this->inlineCDCScript, $lines);
             }
         }
         public static function &lastOf(&$array){
@@ -147,7 +147,7 @@
         //GET Funcs
         public function getUserVar($key){
             if (array_key_exists($key, $this->query["customVars"])){
-                return $this->query["customVars"][$key]
+                return $this->query["customVars"][$key];
             }
             return false;
         }
