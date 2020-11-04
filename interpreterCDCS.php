@@ -164,7 +164,7 @@
             return $this->response;
         }
         public function getResponseAsStr(){
-            return $this->response = json_encode($this->response);
+            return json_encode($this->response);
         }
         
         //SET Funcs
@@ -194,7 +194,7 @@
                 if ($postProcessing){
                     $this->readed = str_replace("\t", "", $this->readed);
                     if ((empty($this->readed) || $this->readed[0] == '#') && !feof($this->scriptPtr)){
-                        $this->readline();
+                        $this->readline($postProcessing);
                     }
                 }
                 return $this->readed;
