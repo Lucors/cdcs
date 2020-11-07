@@ -1,2 +1,2 @@
-msg = "The End."
+this.msg = "The End.";
 @exclude this

@@ -6,10 +6,10 @@
 	@async
 		alert("async Hello world!");
 	@end.
-	var msg = "some text here"
+	this.msg = "some text here";
 	@php
-		if ($this->getUserVar("test") == 5){
-			$this->pushInlineCDCS("@anon test");
+		if ($this->getCustomVar("test") == true){
+			$this->pushInlineCDCS("@anon other/test");
 		}
 	@end.
 @stop.
@@ -17,4 +17,4 @@
 @goto lbl
 alert("This line has been skipped");
 @label lbl
-alert(msg);
+alert(this.msg);
