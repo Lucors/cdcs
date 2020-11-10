@@ -405,8 +405,8 @@
             }
             fclose($this->scriptPtr);
             if (!($this->scriptPtr = fopen($this->currentScriptname . ".cdcs", 'r'))){
-                $this->openScript();
                 $this->warning("Unable open file \"" . $this->currentScriptname . ".cdcs\"");
+                $this->openScript();
             }
             $this->scriptAnon = true;
             $this->extraStep();
