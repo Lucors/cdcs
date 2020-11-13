@@ -20,35 +20,42 @@ let icdcs = {
 	response: {},
 	request: function(command = this.query.command){
 		if (flags.handled){
-			this.query.command = command;
+			try {
+				this.query.command = command;
 
-			var xmlhttp;
-			if (window.XMLHttpRequest) {
-				xmlhttp = new XMLHttpRequest();
-			}
-			else {
-				alert("Браузер не поддерживается");
-			}
+				var xmlhttp;
+				if (window.XMLHttpRequest) {
+					xmlhttp = new XMLHttpRequest();
+				}
+				else {
+					alert("Браузер не поддерживается");
+				}
 
-			xmlhttp.open("POST", "icdcs.php", true);
-			xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			xmlhttp.onreadystatechange = function() {
-				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-					try {
-						icdcs.response = JSON.parse(xmlhttp.response);
-						if ("scripts" in icdcs.response){
-							icdcs.query.scripts = icdcs.response.scripts;
+				xmlhttp.open("POST", "icdcs.php", true);
+				xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+				xmlhttp.onreadystatechange = function() {
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+						try {
+							icdcs.response = JSON.parse(xmlhttp.response);
+							if ("scripts" in icdcs.response){
+								icdcs.query.scripts = icdcs.response.scripts;
+							}
+							icdcs.handleResponse();
+						} 
+						catch (err) {
+							err = "Ошибка обработки ответа сервера: " + err;
+							alert(err);
+							console.error(err);
 						}
-						icdcs.handleResponse();
-					} 
-					catch (err) {
-						err = "Ошибка обработки ответа сервера: " + err;
-						alert(err);
-						console.error(err);
 					}
 				}
+				xmlhttp.send("jsonQuery="+JSON.stringify(this.query));
 			}
-			xmlhttp.send("jsonQuery="+JSON.stringify(this.query));
+			catch (err) {
+				err = "Ошибка при отправки данных на сервер: " + err;
+				alert(err);
+				console.error(err);
+			}
 		}
 	},
 	handleResponse: async function(){

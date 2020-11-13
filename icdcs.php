@@ -417,9 +417,9 @@
     if (!empty($_POST)){
        	$interpreter->setQuery($_POST['jsonQuery']);
         $interpreter->doIt();
-        echo $interpreter->respond();
     }
     else {
        $interpreter->error("Empty Query");
     }
+    echo $interpreter->respond();
 ?>
